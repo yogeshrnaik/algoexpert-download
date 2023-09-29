@@ -58,7 +58,7 @@ def main():
     for idx, question in enumerate(questions, 1):
         question_name = question['name']
         file_name = make_file_name_valid(question_name)
-        question_dir = get_question_dir(question_name, idx)
+        question_dir = get_question_dir(question_name, idx, PARENT_DIR)
         question_data_path = question_dir / f'{file_name}_data.json'
         question_tests_path = question_dir / f'{file_name}_tests.json'
 
