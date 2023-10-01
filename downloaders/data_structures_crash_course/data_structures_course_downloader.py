@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 import requests
@@ -22,6 +23,9 @@ def main():
         serial_number = f"{idx}".rjust(2, '0')
         videos = get_video_urls(ds['video']['vimeoId'], video_quality)
         ds_file_path = ds_course_data_folder_path / f"{serial_number} {ds['name']}_{video_quality}.mp4"
+        if os.path.exists(ds_file_path):
+            print(f"Skipping video: [{ds_file_path}] as it already exists")
+            continue
         target_video_url = videos and videos.get('preferred_video', {}) and videos.get('preferred_video', {}).get('url', '')
         download_video(target_video_url, ds_file_path)
 
