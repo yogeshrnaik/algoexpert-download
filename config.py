@@ -54,6 +54,10 @@ DOWNLOAD_QUESTION_TESTS = True # If previously downloaded then set False
 # Question tests endpoint
 QUESTION_TESTS_ENDPOINT = "https://prod.api.algoexpert.io/api/problems/v1/run_json_tests"
 
+DATA_STRUCTURES_CRASH_COURSE_ENDPOINT = "https://prod.api.algoexpert.io/api/problems/v1/algoexpert/datastructures/get"
+DATA_STRUCTURES_CRASH_COURSE_FOLDER = 'data_structures_crash_course'
+DATA_STRUCTURES_CRASH_COURSE_DATA_FILE_NAME = 'dsa_course_data.json'
+
 # Cooldown time between requests in seconds
 COOLDOWN_TIME = 1
 

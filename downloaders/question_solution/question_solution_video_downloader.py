@@ -17,8 +17,7 @@ sys.path.append(str(CURRENT_FILE_PATH.parent.parent.parent))
 from rename import make_file_name_valid
 from question_directory_getter import get_question_dir
 from file_helper import load_json_file_as_python_obj
-from config import VIDEO_URLS_REGEX, REQUEST_HEADERS_FOR_VIMEO_SITE, \
-    PARENT_DIR, QUESTION_LIST_FILE_NAME
+from config import VIDEO_URLS_REGEX, REQUEST_HEADERS_FOR_VIMEO_SITE, QUESTION_LIST_FILE_NAME
 
 
 # https://player.vimeo.com/video/{ VIMEO_VIDEO_ID }
@@ -54,12 +53,12 @@ def download_video(url: str, destination: pathlib.Path, chunk_size=1024 * 1024 *
 
 def main():
     download_question_solutions(
-        "",
-        1, 150
+        "<path_containing_questions_from_to_index>",
+        1, 125
     )
     download_question_solutions(
-        "",
-        151, 195
+        "<path_containing_questions_from_to_index>",
+        126, 195
     )
 
 
@@ -85,7 +84,7 @@ def download_question_solutions(all_questions_parent_path, questionStartIndex, q
         elif target_video_url:
             download_video(target_video_url, question_solution_path)
         else:
-            print(f"Skipping video: [{question_solution_path}] as target_video_url is not found")
+            print(f"target_video_url is not found for video: [{question_solution_path}]")
 
 
 def get_target_video_url(question_file_name, quality, question_dir):
@@ -99,7 +98,6 @@ def get_target_video_url(question_file_name, quality, question_dir):
     # print(f"Video: {videos}")
     target_video_url = videos and videos.get('preferred_video', {}) and videos.get('preferred_video', {}).get('url', '')
     return target_video_url
-
 
 if __name__ == "__main__":
     main()
