@@ -6,6 +6,7 @@ import requests
 from config import REQUEST_HEADERS_FOR_ALGOEXPERT_SITE, PARENT_DIR, INDENTATION_SPACES
 from file_helper import write_python_object_to_file
 from question_solution.question_solution_video_downloader import get_video_urls, download_video
+from rename import make_file_name_valid
 
 SYSTEM_EXPERT_FUNDAMENTALS_ENDPOINT = "https://prod.api.algoexpert.io/api/problems/v1/systemsexpert/fundamentals/get"
 SYSTEM_EXPERT_FUNDAMENTALS_FOLDER = 'system_expert_fundamentals'
@@ -37,7 +38,8 @@ def main():
     for idx, fundamental in enumerate(system_expert_fundamentals_data['fundamentals'], 1):
         serial_number = f"{idx}".rjust(2, '0')
         videos = get_video_urls(fundamental['video']['vimeoId'], video_quality)
-        fundamental_file_path = system_expert_fundamentals_data_folder_path / f"{serial_number} {fundamental['name']}_{video_quality}.mp4"
+        fundamental_name = make_file_name_valid(fundamental['name'])
+        fundamental_file_path = system_expert_fundamentals_data_folder_path / f"{serial_number} {fundamental_name}_{video_quality}.mp4"
         if os.path.exists(fundamental_file_path):
             print(f"Skipping video: [{fundamental_file_path}] as it already exists")
             continue

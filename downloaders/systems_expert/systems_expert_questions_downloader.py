@@ -6,7 +6,7 @@ import requests
 from config import REQUEST_HEADERS_FOR_ALGOEXPERT_SITE, PARENT_DIR, INDENTATION_SPACES
 from file_helper import write_python_object_to_file
 from question_solution.question_solution_video_downloader import get_video_urls, download_video
-
+from rename import make_file_name_valid
 
 SYSTEM_EXPERT_QUESTIONS_ENDPOINT = "https://prod.api.algoexpert.io/api/problems/v1/systemsexpert/design-questions/list"
 SYSTEM_EXPERT_QUESTIONS_FOLDER = 'system_expert_questions'
@@ -38,12 +38,13 @@ def main():
     for idx, question in enumerate(system_expert_questions_data['questions'], 1):
         serial_number = f"{idx}".rjust(2, '0')
         videos = get_video_urls(question['video']['vimeoId'], video_quality)
-        sdq_file_path = system_expert_questions_data_folder_path / f"{serial_number} {question['name']}_{video_quality}.mp4"
-        if os.path.exists(sdq_file_path):
-            print(f"Skipping video: [{sdq_file_path}] as it already exists")
+        question_name = make_file_name_valid(question['name'])
+        question_name_file_path = system_expert_questions_data_folder_path / f"{serial_number} {question_name}_{video_quality}.mp4"
+        if os.path.exists(question_name_file_path):
+            print(f"Skipping video: [{question_name_file_path}] as it already exists")
             continue
         target_video_url = videos and videos.get('preferred_video', {}) and videos.get('preferred_video', {}).get('url', '')
-        download_video(target_video_url, sdq_file_path)
+        download_video(target_video_url, question_name_file_path)
 
 
 if __name__ == "__main__":
