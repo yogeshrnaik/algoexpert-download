@@ -53,18 +53,17 @@ def download_video(url: str, destination: pathlib.Path, chunk_size=1024 * 1024 *
 
 def main():
     download_question_solutions(
-        "<path_containing_questions_from_to_index>",
+        "/Users/username/Library/CloudStorage/GoogleDrive-username@gmail.com/My Drive/AlgoExpert/All Questions",
         1, 125
     )
     download_question_solutions(
-        "<path_containing_questions_from_to_index>",
+        "/Users/username/Library/CloudStorage/GoogleDrive-username@gmail.com/My Drive/AlgoExpert/All Questions",
         126, 195
     )
 
 
 def download_question_solutions(all_questions_parent_path, questionStartIndex, questionsEndIndex):
-    questions: list = \
-    load_json_file_as_python_obj(pathlib.Path(rf"{all_questions_parent_path}/" + QUESTION_LIST_FILE_NAME))['questions']
+    questions: list = load_json_file_as_python_obj(pathlib.Path(rf"{all_questions_parent_path}/" + QUESTION_LIST_FILE_NAME))['questions']
     questions.sort(key=lambda obj: obj.get('difficulty'))
     quality = '540p'
 

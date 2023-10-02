@@ -39,7 +39,7 @@ def run_tests_get_response(submission_question:dict, url=QUESTION_TESTS_ENDPOINT
 
 
 def main():
-    question_list_file_path = PARENT_DIR / QUESTION_LIST_FILE_NAME
+    question_list_file_path = PARENT_DIR / f"AlgoExpert/All Questions/{QUESTION_LIST_FILE_NAME}"
     if DOWNLOAD_QUESTION_LIST:
         if LOG:
             print("Downloading question list")
