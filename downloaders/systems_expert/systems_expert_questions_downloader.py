@@ -3,11 +3,12 @@ import pathlib
 
 import requests
 
-from config import REQUEST_HEADERS_FOR_ALGOEXPERT_SITE, PARENT_DIR, INDENTATION_SPACES
+from config import REQUEST_HEADERS_FOR_ALGOEXPERT_SITE, INDENTATION_SPACES
 from file_helper import write_python_object_to_file
 from question_solution.question_solution_video_downloader import get_video_urls, download_video
 from rename import make_file_name_valid
 
+PARENT_DIR:pathlib.Path = pathlib.Path(r"PARENT_DIR_TO_DOWNLOAD")
 SYSTEM_EXPERT_QUESTIONS_ENDPOINT = "https://prod.api.algoexpert.io/api/problems/v1/systemsexpert/design-questions/list"
 SYSTEM_EXPERT_QUESTIONS_FOLDER = 'system_expert_questions'
 SYSTEM_EXPERT_QUESTIONS_DATA_FILE_NAME = 'system_expert_questions_data.json'
