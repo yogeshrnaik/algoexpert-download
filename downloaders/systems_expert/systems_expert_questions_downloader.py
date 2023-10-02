@@ -18,6 +18,19 @@ def get_system_expert_questions_data(url=SYSTEM_EXPERT_QUESTIONS_ENDPOINT):
     return response.json()
 
 
+def write_system_expert_questions_data_file(system_expert_questions_data_folder_path):
+    system_expert_questions_data = get_system_expert_questions_data()
+    system_expert_questions_data_file_path = system_expert_questions_data_folder_path / SYSTEM_EXPERT_QUESTIONS_DATA_FILE_NAME
+    write_python_object_to_file(system_expert_questions_data, system_expert_questions_data_file_path, INDENTATION_SPACES)
+    return system_expert_questions_data
+
+
+def create_system_expert_questions_data_folder():
+    system_expert_questions_data_folder_path = pathlib.Path(PARENT_DIR / SYSTEM_EXPERT_QUESTIONS_FOLDER)
+    system_expert_questions_data_folder_path.mkdir(parents=True, exist_ok=True)
+    return system_expert_questions_data_folder_path
+
+
 def main():
     video_quality = '540p'
     system_expert_questions_data_folder_path = create_system_expert_questions_data_folder()
@@ -31,19 +44,6 @@ def main():
             continue
         target_video_url = videos and videos.get('preferred_video', {}) and videos.get('preferred_video', {}).get('url', '')
         download_video(target_video_url, sdq_file_path)
-
-
-def write_system_expert_questions_data_file(system_expert_questions_data_folder_path):
-    system_expert_questions_data = get_system_expert_questions_data()
-    system_expert_questions_data_file_path = system_expert_questions_data_folder_path / SYSTEM_EXPERT_QUESTIONS_DATA_FILE_NAME
-    write_python_object_to_file(system_expert_questions_data, system_expert_questions_data_file_path, INDENTATION_SPACES)
-    return system_expert_questions_data
-
-
-def create_system_expert_questions_data_folder():
-    system_expert_questions_data_folder_path = pathlib.Path(PARENT_DIR / SYSTEM_EXPERT_QUESTIONS_FOLDER)
-    system_expert_questions_data_folder_path.mkdir(parents=True, exist_ok=True)
-    return system_expert_questions_data_folder_path
 
 
 if __name__ == "__main__":
