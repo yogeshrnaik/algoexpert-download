@@ -22,10 +22,10 @@ def main():
     video_quality = '540p'
     system_expert_questions_data_folder_path = create_system_expert_questions_data_folder()
     system_expert_questions_data = write_system_expert_questions_data_file(system_expert_questions_data_folder_path)
-    for idx, sdq in enumerate(system_expert_questions_data['questions'], 1):
+    for idx, question in enumerate(system_expert_questions_data['questions'], 1):
         serial_number = f"{idx}".rjust(2, '0')
-        videos = get_video_urls(sdq['video']['vimeoId'], video_quality)
-        sdq_file_path = system_expert_questions_data_folder_path / f"{serial_number} {sdq['name']}_{video_quality}.mp4"
+        videos = get_video_urls(question['video']['vimeoId'], video_quality)
+        sdq_file_path = system_expert_questions_data_folder_path / f"{serial_number} {question['name']}_{video_quality}.mp4"
         if os.path.exists(sdq_file_path):
             print(f"Skipping video: [{sdq_file_path}] as it already exists")
             continue
