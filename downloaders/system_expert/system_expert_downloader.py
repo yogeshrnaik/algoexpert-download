@@ -25,12 +25,12 @@ def main():
     for idx, sdq in enumerate(system_expert_questions_data['questions'], 1):
         serial_number = f"{idx}".rjust(2, '0')
         videos = get_video_urls(sdq['video']['vimeoId'], video_quality)
-        ds_file_path = system_expert_questions_data_folder_path / f"{serial_number} {sdq['name']}_{video_quality}.mp4"
-        if os.path.exists(ds_file_path):
-            print(f"Skipping video: [{ds_file_path}] as it already exists")
+        sdq_file_path = system_expert_questions_data_folder_path / f"{serial_number} {sdq['name']}_{video_quality}.mp4"
+        if os.path.exists(sdq_file_path):
+            print(f"Skipping video: [{sdq_file_path}] as it already exists")
             continue
         target_video_url = videos and videos.get('preferred_video', {}) and videos.get('preferred_video', {}).get('url', '')
-        download_video(target_video_url, ds_file_path)
+        download_video(target_video_url, sdq_file_path)
 
 
 def write_system_expert_questions_data_file(system_expert_questions_data_folder_path):
